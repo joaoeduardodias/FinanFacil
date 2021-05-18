@@ -1,4 +1,6 @@
-import { User } from "../infra/entities/User";
+// DTO => Data object transfer
+
+import { User } from "../models/User";
 
 interface ICreateUserDTO {
   name: string;
@@ -14,6 +16,7 @@ class UserRepository {
 
   create({ name, email, password }: ICreateUserDTO): void {
     const user = new User();
+
     Object.assign(user, {
       name,
       email,
@@ -22,6 +25,10 @@ class UserRepository {
     });
 
     this.users.push(user);
+  }
+  findByEmail(email: string): User {
+    const user = this.users.find((user) => user.email === email);
+    return user;
   }
   list(): User[] {
     return this.users;
