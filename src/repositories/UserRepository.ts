@@ -1,14 +1,7 @@
-// DTO => Data object transfer
-
 import { User } from "../models/User";
+import { ICreateUserDTO, IUserRepository } from "./IUserRepository";
 
-interface ICreateUserDTO {
-  name: string;
-  email: string;
-  password: string;
-}
-
-class UserRepository {
+class UserRepository implements IUserRepository {
   private users: User[];
   constructor() {
     this.users = [];
