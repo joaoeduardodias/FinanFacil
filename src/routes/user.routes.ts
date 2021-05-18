@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import { UserRepository } from "../repositories/UserRepository";
 import { CreateUserService } from "../services/CreateUserService";
+import { ListAllUsersService } from "../services/ListAllUsersService";
 
 const userRoutes = Router();
 
@@ -14,7 +15,8 @@ userRoutes.post("/", (request, response) => {
   return response.status(201).send();
 });
 userRoutes.get("/", (request, response) => {
-  const users = userRepository.list();
+  const listAllUserservice = new ListAllUsersService(userRepository);
+  const users = listAllUserservice.execute();
   return response.json(users).send();
 });
 
