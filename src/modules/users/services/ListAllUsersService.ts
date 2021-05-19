@@ -1,8 +1,8 @@
 import { User } from "../models/User";
-import { UserRepository } from "../repositories/UserRepository";
+import { IUserRepository } from "../repositories/IUserRepository";
 
 class ListAllUsersService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: IUserRepository) {}
 
   execute(): User[] {
     const users = this.userRepository.list();
