@@ -1,4 +1,4 @@
-import { User } from "../models/User";
+import { User } from "../model/User";
 
 interface ICreateUserDTO {
   name: string;
