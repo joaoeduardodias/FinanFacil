@@ -5,7 +5,44 @@
     "description": "this documentation api FinanFacil",
     "version": "1.0.0",
     "contact": {
+      "name": "João Dias",
       "email": "joaoeduardodias123@gmail.com"
+    }
+  },
+  "paths": {
+    "/users":{
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create User",
+        "description": "Create a new user!",
+        "requestBody":{
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "name":{ "type":"string"},
+                  "email":{"type": "string"},
+                  "password":{"type": "string"}
+                },
+                "example": {
+                  "name": "User name sample",
+                  "email": "usertest@email.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created"
+          },
+          "500":{
+            "description": "User already exists!"
+          }
+        }
+      } 
     }
   }
 }
