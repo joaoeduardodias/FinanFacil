@@ -1,6 +1,19 @@
 version: "3.7"
 
 services: 
+  database_finanFacil:
+    image: postgres
+    container_name: database_finanFacil
+    restart: always
+    ports: 
+      - 5432:5432
+    environment: 
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=ignite
+      - POSTGRES_DB=finanFacil
+    volumes:
+      - pgdata:/data/postgres
+        
   app:
     build: .
     container_name: finanfacil
@@ -8,3 +21,11 @@ services:
       - 3333:3333
     volumes: 
       - .:/usr/app
+    links: 
+      - database_finanFacil
+    depends_on: 
+      - database_finanFacil  
+
+volumes: 
+  pgdata:
+    driver: local
