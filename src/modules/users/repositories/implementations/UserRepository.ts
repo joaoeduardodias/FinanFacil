@@ -1,4 +1,4 @@
-import { User } from "../../model/User";
+import { User } from "../../entities/User";
 import { ICreateUserDTO, IUserRepository } from "../IUserRepository";
 
 class UserRepository implements IUserRepository {
