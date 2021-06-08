@@ -10,6 +10,7 @@ class UserRepositoryInMemory implements IUserRepository {
   private constructor() {
     this.users = [];
   }
+
   public static getInstance(): UserRepositoryInMemory {
     if (!UserRepositoryInMemory.INSTANCE) {
       UserRepositoryInMemory.INSTANCE = new UserRepositoryInMemory();
@@ -35,6 +36,10 @@ class UserRepositoryInMemory implements IUserRepository {
   }
   async list(): Promise<User[]> {
     return this.users;
+  }
+  async findById(id: string): Promise<User> {
+    const user = this.users.find((user) => user.id === id);
+    return user;
   }
 }
 
