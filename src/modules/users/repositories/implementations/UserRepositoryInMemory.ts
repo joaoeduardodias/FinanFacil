@@ -1,5 +1,6 @@
+import { ICreateUserDTO } from "../../dtos/CreateUserDTO";
 import { User } from "../../entities/User";
-import { ICreateUserDTO, IUserRepository } from "../IUserRepository";
+import { IUserRepository } from "../IUserRepository";
 
 class UserRepositoryInMemory implements IUserRepository {
   private users: User[];
