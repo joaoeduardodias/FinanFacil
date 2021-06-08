@@ -2,8 +2,9 @@ import { UserRepository } from "../../repositories/implementations/UserRepositor
 import { ListAllsersController } from "./ListAllsersController";
 import { ListAllUsersUseCase } from "./ListAllUsersUseCase";
 
-const userRepository = UserRepository.getInstance();
-const listAllUsersUseCase = new ListAllUsersUseCase(userRepository);
-const listAllUsersController = new ListAllsersController(listAllUsersUseCase);
-
-export { listAllUsersController };
+export default (): ListAllsersController => {
+  const userRepository = new UserRepository();
+  const listAllUsersUseCase = new ListAllUsersUseCase(userRepository);
+  const listAllUsersController = new ListAllsersController(listAllUsersUseCase);
+  return listAllUsersController;
+};
