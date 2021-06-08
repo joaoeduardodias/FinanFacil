@@ -1,3 +1,4 @@
+import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
 
 import { IUserRepository } from "../../repositories/IUserRepository";
@@ -20,7 +21,8 @@ class CreateUserUseCase {
     if (userAlreadyExist) {
       throw new Error("User already exists !");
     }
-    this.userRepository.create({ name, email, password });
+    const passwordHash = await hash(password, 8);
+    this.userRepository.create({ name, email, password: passwordHash });
   }
 }
 
