@@ -28,7 +28,7 @@ class CardRepository implements ICardRepository {
     await this.repository.save(user);
   }
   async findByCardsofUser(user_id: string): Promise<Card[]> {
-    const cards = await this.repository.find({ where: { user_id } });
+    const cards = await this.repository.find({ user_id });
     return cards;
   }
   async findByCardNumber(number: number): Promise<Card> {
