@@ -8,7 +8,7 @@
  [x] O usuário poderá adicionar cartões de crédito.
  [] O usuário poderá dividir os seus gastos em categorias.
  [] O usuário poderá definir metas a serem cumpridas, sendo elas de despesas, "devo gastar até esse valor", ou de renda, "devo guardar esse valor".
-
+ [x] O usuário poderá listar todos os seus cartões de crédito cadastrados.
 
 ## RN
 [] O usuário poderá escolher de qual conta ele quer debitar o se gasto.

@@ -12,7 +12,7 @@ export async function EnsureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction
-) {
+): Promise<void> {
   const auth = request.headers.authorization;
   if (!auth) {
     throw new AppError("Token missing!", 401);
@@ -30,7 +30,10 @@ export async function EnsureAuthenticated(
     if (!user) {
       throw new AppError("User does not exists!", 401);
     }
-    next();
+    request.user = {
+      id: user_id,
+    };
+    return next();
   } catch (error) {
     throw new AppError("Invalid token!", 401);
   }
