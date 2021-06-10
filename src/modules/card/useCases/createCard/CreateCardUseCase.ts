@@ -7,8 +7,10 @@ interface IRequest {
   user_id: string;
   number: number;
   cvc: number;
-  date_validity: string;
+  date_validity: Date;
+  card_validity: Date;
   limit: number;
+  limit_available: number;
 }
 
 @injectable()
@@ -22,7 +24,9 @@ class CreateCardUseCase {
     user_id,
     cvc,
     date_validity,
+    card_validity,
     limit,
+    limit_available,
     number,
   }: IRequest): Promise<void> {
     const cardAlreadyExists = await this.cardRepository.findByCardNumber(
@@ -37,7 +41,9 @@ class CreateCardUseCase {
       user_id,
       cvc,
       date_validity,
+      card_validity,
       limit,
+      limit_available,
       number,
     });
   }

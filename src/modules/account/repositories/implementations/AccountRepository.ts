@@ -1,6 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 
 import { ICreateAccountDTO } from "../../dtos/ICreateAccountDTO";
+import { IUpdateFundsAccountDTO } from "../../dtos/IUpdateAccountDTO";
 import { Account } from "../../entities/Account";
 import { IAccountRepository } from "../IAccountRepository";
 
@@ -30,6 +31,18 @@ class AccountRepository implements IAccountRepository {
   async findByName(name: string): Promise<Account> {
     const account = await this.repository.findOne({ name });
     return account;
+  }
+  async findById(id: string): Promise<Account> {
+    const account = await this.repository.findOne(id);
+    return account;
+  }
+  async UpdateFundsAccount({
+    id,
+    value_total,
+  }: IUpdateFundsAccountDTO): Promise<void> {
+    const account = await this.repository.findOne(id);
+    account.value_total = value_total;
+    await this.repository.save(account);
   }
 }
 

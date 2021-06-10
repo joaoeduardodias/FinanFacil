@@ -8,10 +8,17 @@ import {
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
+import { Account } from "../../account/entities/Account";
+import { Card } from "../../card/entities/Card";
 import { User } from "../../users/entities/User";
 
-@Entity("card")
-class Card {
+enum Operation {
+  credit,
+  debit,
+}
+
+@Entity("transactions")
+class Transaction {
   @PrimaryColumn()
   id: string;
 
@@ -23,22 +30,24 @@ class Card {
   user_id: string;
 
   @Column()
-  cvc: number;
+  type: Operation;
 
   @Column()
-  card_validity: Date;
+  value: number;
+
+  @ManyToOne(() => Account)
+  @JoinColumn({ name: "account_id" })
+  account: Account;
 
   @Column()
-  date_validity: Date;
+  account_id: string;
+
+  @ManyToOne(() => Card)
+  @JoinColumn({ name: "card_id" })
+  card: Card;
 
   @Column()
-  limit: number;
-
-  @Column()
-  limit_available: number;
-
-  @Column()
-  number: number;
+  card_id: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -50,4 +59,4 @@ class Card {
   }
 }
 
-export { Card };
+export { Transaction };

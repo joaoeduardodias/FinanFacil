@@ -2,8 +2,10 @@ interface ICreateCardDTO {
   user_id: string;
   number: number;
   cvc: number;
-  date_validity: string;
+  card_validity: Date;
+  date_validity: Date;
   limit: number;
+  limit_available: number;
 }
 
 export { ICreateCardDTO };
