@@ -81,8 +81,6 @@ class CreateTransactionUseCase {
         newFunds = Number(account.value_total);
         newFunds += value;
 
-        console.log(newFunds);
-
         await this.transactionRepository.UpdateFundsAccount({
           account_id,
           funds: newFunds,
@@ -96,12 +94,32 @@ class CreateTransactionUseCase {
         });
       }
       if (card_id) {
-        console.log("credit in card");
         const card = await this.transactionRepository.findByCard(card_id);
         if (!card) {
           throw new AppError("Card not exists!");
         }
-        console.log("em construção");
+
+        const fat = card.limit - card.limit_available;
+
+        if (fat < value) {
+          throw new AppError(
+            "Operation not allowed!, try again value with a lower value"
+          );
+        }
+        let newLimitAvailable = Number(card.limit_available);
+        newLimitAvailable += value;
+        card.limit_available = newLimitAvailable;
+        await this.transactionRepository.UpdateLimitAvailableCard({
+          card_id,
+          newLimitAvailable,
+        });
+        await this.transactionRepository.create({
+          value,
+          type,
+          user_id,
+          account_id,
+          card_id,
+        });
       }
     }
   }
