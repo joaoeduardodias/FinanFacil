@@ -30,12 +30,9 @@ class CreateTransactionUseCase {
           account_id
         );
         if (!account) {
-          // CONCERTAR ESSE ERRO QUE DA NO THROW NEW APPERROR
-          // throw new AppError("Account not exists!");
-          console.log(account);
+          throw new AppError("Account not exists!");
         }
         const newFunds = account.value_total - value;
-        console.log(newFunds);
         await this.transactionRepository.UpdateFundsAccount({
           account_id,
           funds: newFunds,
@@ -49,16 +46,12 @@ class CreateTransactionUseCase {
         });
       }
       if (card_id) {
-        console.log("debit in card");
         const card = await this.transactionRepository.findByCard(card_id);
         if (!card) {
-          // AQUI TAMBEM GERA  O ERRO
-          // throw new AppError("Card not exists!");
-          console.log("tambem  da erro");
+          throw new AppError("Card not exists!");
         }
         if (card.limit_available < value) {
-          console.log("mesmo erro");
-          // throw new AppError("Insuficient funds!");
+          throw new AppError("Insuficient funds!");
         }
         const newLimitAvailable = card.limit_available - value;
         await this.transactionRepository.UpdateLimitAvailableCard({
@@ -80,8 +73,7 @@ class CreateTransactionUseCase {
           account_id
         );
         if (!account) {
-          // throw new AppError("Account not exists!");
-          console.log(account);
+          throw new AppError("Account not exists!");
         }
 
         let newFunds: number;
@@ -107,9 +99,9 @@ class CreateTransactionUseCase {
         console.log("credit in card");
         const card = await this.transactionRepository.findByCard(card_id);
         if (!card) {
-          console.log("erro cartao n existe");
-          // throw new AppError("Card not exists!");
+          throw new AppError("Card not exists!");
         }
+        console.log("em construção");
       }
     }
   }

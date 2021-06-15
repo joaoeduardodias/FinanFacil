@@ -11,7 +11,7 @@ class CreateTransactionController {
     const createTransactionUseCase = container.resolve(
       CreateTransactionUseCase
     );
-    createTransactionUseCase.execute({
+    await createTransactionUseCase.execute({
       account_id,
       card_id,
       type,
