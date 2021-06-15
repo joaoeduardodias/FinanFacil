@@ -18,10 +18,12 @@ export class CreateTransaction1623278881072 implements MigrationInterface {
           {
             name: "account_id",
             type: "uuid",
+            isNullable: true,
           },
           {
             name: "card_id",
             type: "uuid",
+            isNullable: true,
           },
           {
             name: "type",

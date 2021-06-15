@@ -28,7 +28,15 @@ export class CreateCard1623173437988 implements MigrationInterface {
             type: "varchar",
           },
           {
+            name: "card_validity",
+            type: "varchar",
+          },
+          {
             name: "limit",
+            type: "numeric",
+          },
+          {
+            name: "limit_available",
             type: "numeric",
           },
           {

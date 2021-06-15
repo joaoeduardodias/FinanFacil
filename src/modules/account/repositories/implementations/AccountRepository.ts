@@ -36,14 +36,6 @@ class AccountRepository implements IAccountRepository {
     const account = await this.repository.findOne(id);
     return account;
   }
-  async UpdateFundsAccount({
-    id,
-    value_total,
-  }: IUpdateFundsAccountDTO): Promise<void> {
-    const account = await this.repository.findOne(id);
-    account.value_total = value_total;
-    await this.repository.save(account);
-  }
 }
 
 export { AccountRepository };

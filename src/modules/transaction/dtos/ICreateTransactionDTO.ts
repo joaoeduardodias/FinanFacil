@@ -1,11 +1,6 @@
-enum Operation {
-  credit,
-  debit,
-}
-
 interface ICreateTransactionDTO {
   user_id: string;
-  type: Operation;
+  type: string;
   value: number;
   account_id: string;
   card_id: string;

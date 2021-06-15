@@ -1,6 +1,6 @@
 interface IUpdateFundsCardDTO {
-  id: string;
-  newFunds: number;
+  card_id: string;
+  newLimitAvailable: number;
 }
 
 export { IUpdateFundsCardDTO };

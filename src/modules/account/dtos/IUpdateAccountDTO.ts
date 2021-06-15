@@ -1,6 +1,6 @@
 interface IUpdateFundsAccountDTO {
-  id: string;
-  value_total: number;
+  account_id: string;
+  funds: number;
 }
 
 export { IUpdateFundsAccountDTO };

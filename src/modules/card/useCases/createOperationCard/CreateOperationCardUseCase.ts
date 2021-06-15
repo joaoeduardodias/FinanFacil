@@ -3,14 +3,9 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/AppError";
 import { ICardRepository } from "../../repositories/ICardRepository";
 
-enum Operation {
-  credit,
-  debit,
-}
-
 interface IRequest {
   card_id: string;
-  type: Operation;
+  type: string;
   value: number;
 }
 
@@ -26,7 +21,7 @@ class CreateOperationCardUseCase {
     if (!card) {
       throw new AppError("Card not exists!");
     }
-    if (type === Operation.debit) {
+    if (type === "debit") {
       if (card.limit_available < value) {
         throw new AppError("Insufficient funds!");
       }
@@ -36,7 +31,7 @@ class CreateOperationCardUseCase {
         newFunds,
       });
     }
-    if (type === Operation.credit) {
+    if (type === "credit") {
       if (card.limit_available + value < card.limit) {
         const newFunds = card.limit_available + value;
         await this.cardRepository.UpdateFundsCard({

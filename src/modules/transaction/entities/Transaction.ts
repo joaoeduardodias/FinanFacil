@@ -12,11 +12,6 @@ import { Account } from "../../account/entities/Account";
 import { Card } from "../../card/entities/Card";
 import { User } from "../../users/entities/User";
 
-enum Operation {
-  credit,
-  debit,
-}
-
 @Entity("transactions")
 class Transaction {
   @PrimaryColumn()
@@ -30,7 +25,7 @@ class Transaction {
   user_id: string;
 
   @Column()
-  type: Operation;
+  type: string;
 
   @Column()
   value: number;
