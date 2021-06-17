@@ -21,7 +21,7 @@ class CardRepository implements ICardRepository {
     limit,
     limit_available,
   }: ICreateCardDTO): Promise<void> {
-    const user = this.repository.create({
+    const card = this.repository.create({
       user_id,
       number,
       cvc,
@@ -30,7 +30,7 @@ class CardRepository implements ICardRepository {
       limit,
       limit_available,
     });
-    await this.repository.save(user);
+    await this.repository.save(card);
   }
   async findByCardsofUser(user_id: string): Promise<Card[]> {
     const cards = await this.repository.find({ user_id });
