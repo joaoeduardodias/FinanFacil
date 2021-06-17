@@ -3,20 +3,7 @@ import { User } from "../../entities/User";
 import { IUserRepository } from "../IUserRepository";
 
 class UserRepositoryInMemory implements IUserRepository {
-  private users: User[];
-
-  private static INSTANCE: UserRepositoryInMemory;
-
-  private constructor() {
-    this.users = [];
-  }
-
-  public static getInstance(): UserRepositoryInMemory {
-    if (!UserRepositoryInMemory.INSTANCE) {
-      UserRepositoryInMemory.INSTANCE = new UserRepositoryInMemory();
-    }
-    return UserRepositoryInMemory.INSTANCE;
-  }
+  users: User[] = [];
 
   async create({ name, email, password }: ICreateUserDTO): Promise<void> {
     const user = new User();
