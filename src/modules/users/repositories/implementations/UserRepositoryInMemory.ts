@@ -5,7 +5,7 @@ import { IUserRepository } from "../IUserRepository";
 class UserRepositoryInMemory implements IUserRepository {
   users: User[] = [];
 
-  async create({ name, email, password }: ICreateUserDTO): Promise<void> {
+  async create({ name, email, password }: ICreateUserDTO): Promise<User> {
     const user = new User();
 
     Object.assign(user, {
@@ -16,6 +16,7 @@ class UserRepositoryInMemory implements IUserRepository {
     });
 
     this.users.push(user);
+    return user;
   }
   async findByEmail(email: string): Promise<User> {
     const user = this.users.find((user) => user.email === email);
